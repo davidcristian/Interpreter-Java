@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.davidcristian.interpreter.GUI.ChooserController">
+    <VBox alignment="CENTER">
+        <HBox alignment="TOP_CENTER">
+            <VBox.margin>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+            </VBox.margin>
+            <Label alignment="CENTER" minWidth="32.0" prefWidth="112.0" text="Garbage Collector:">
+                <padding>
+                    <Insets right="4.0" top="4.0"/>
+                </padding>
+            </Label>
+            <ComboBox fx:id="gcComboBox" onAction="#gcComboBoxChanged" prefWidth="128.0" promptText="UNKNOWN"/>
+        </HBox>
+        <ListView fx:id="programsListView" onKeyReleased="#listViewKeyReleased" onMouseClicked="#listViewClicked"
+                  VBox.vgrow="ALWAYS">
+            <VBox.margin>
+                <Insets bottom="16.0" left="16.0" right="16.0"/>
+            </VBox.margin>
+        </ListView>
+        <GridPane alignment="BOTTOM_CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" percentWidth="25.0"/>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="50.0"/>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" percentWidth="25.0"/>
+            </columnConstraints>
+            <Button fx:id="executeButton" alignment="CENTER" disable="true" minHeight="-Infinity"
+                    mnemonicParsing="false" onAction="#executeButtonPressed" prefHeight="32.0" text="Execute Selection"
+                    GridPane.columnIndex="1">
+                <font>
+                    <Font name="Arial" size="12.0"/>
+                </font>
+            </Button>
+            <rowConstraints>
+                <RowConstraints/>
+            </rowConstraints>
+            <VBox.margin>
+                <Insets bottom="16.0"/>
+            </VBox.margin>
+        </GridPane>
+    </VBox>
+</StackPane>

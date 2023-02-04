@@ -1,0 +1,22 @@
+.list-view, .table-view {
+    -fx-background-insets: 0;
+}
+
+.list-cell, .table-row-cell {
+    -fx-background-color: -fx-background;
+    -fx-background-insets: 0;
+}
+
+.table-view .scroll-bar:horizontal * {
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+.invalid-program {
+    -fx-text-fill: red;
+}
