@@ -44,8 +44,8 @@ Repository:
 
 Controller:
 - contains a reference to an `IRepository` object
-- has a `oneStep` method that executes one step of the program
-- has an `allSteps` method that executes all steps of the program
+- has a `oneStep` method that executes one step of the currently selected program
+- has an `allSteps` method that executes all steps of the currently selected program
 - has a flag for displaying the execution of the program step by step
 
 View:
