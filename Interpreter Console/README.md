@@ -62,12 +62,13 @@ Repository:
 - add a new `logProgramStateExecution` method to the `IRepository` interface. Create the implementation using a `PrintWriter` in append mode
 
 Controller:
-- modify the `allSteps` method to log the state of the program after step
+- modify the `allSteps` method to log the state of the program after each step
 
 File Operations:
 - implement a new `FileTable` that manages files opened by the programs
 - add a new `defaultValue` method to the `IType` interface
-- modify the Type classes to implement the `defaultValue` method
+- modify each type to implement the `defaultValue` method
+- modify the `VariableDeclarationStatement` class to use the `defaultValue` method
 - add a new `StringType` class that implements the `IType` interface
 - add a new `StringValue` class that implements the `IValue` interface
 - override the `equals` method in all classes that extend the `IValue` interface
@@ -85,7 +86,7 @@ Implement the View part of the MVC architecture
 - add a new `Interpreter` class that will be the main class of the application
     
 IExpression:
-- integrate a new `RelationalExpression` class that implements the `IExpression` interface
+- add a new `RelationalExpression` class that implements the `IExpression` interface
 
 ### 3
 Heap Management:
@@ -97,7 +98,7 @@ Heap Management:
 - Define a new `HeapWriteStatement` class that implements the `IStatement` interface
 
 Garbage Collector:
-- Add an unsafe garbage collector that removes all Heap Table entries whose address is not referenced by any SymTable entry
+- Add an unsafe garbage collector that removes all Heap Table entries that are not directly referenced by any `ReferenceValue` entry in the Symbol Table
 - Call the garbage collector in the `allSteps` method of the `Controller` class, after each execution of a program
 - Log the state of the program before and after the garbage collector is called
 - Implement a safe garbage collector that also checks references to other Heap Table entries
@@ -109,7 +110,7 @@ IStatement:
 Implement support for concurrent programming. You must do the following modifications:
 
 Repository:
-- the repository must store a list of `ProgramState` objects
+- the repository must store a list of `ProgramState` objects, with each `ProgramState` object representing a thread
 - add a new `getProgramList` method to the `IRepository` interface
 - add a new `setProgramList` method to the `IRepository` interface
 - remove the `getCurrentProgram` method from the `IRepository` interface
@@ -126,9 +127,9 @@ IStatement:
 Controller:
 - add a new `getUnfinishedPrograms` method to the `Controller` class that returns all unfinished `ProgramState` objects from the repository
 - implement an `ExecutorService` in the `Controller` class that uses a fixed thread pool with 2 threads
-- implement a new `oneStep` method that executes one step for each `ProgramState` object in the list of `ProgramState` objects
-- update the `allStep` method to use the new `oneStep` method and the executor service
-- implement a new Conservative Garbage Collector that works with concurrent programs
+- implement a new `oneStep` method that concurrently executes the `oneStep` method of each `ProgramState` object in the list of `ProgramState` objects
+- update the `allSteps` method to use the new `oneStep` method and the executor service created previously
+- implement a new Conservative Garbage Collector that works with concurrent programs. It must take into account the fact that the Heap Table is shared between programs and each program has its own SymTable
 
 ### 5
 Implement a Type Checker for your programs. You have to do the following modifications:
